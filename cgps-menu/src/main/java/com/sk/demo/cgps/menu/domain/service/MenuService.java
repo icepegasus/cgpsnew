@@ -13,6 +13,7 @@ public interface MenuService {
 	Page<Menu> findAll(Pageable pageable);
 	
 	List<Menu> findByRestaurantNameLike(String restaurantName);
+	Menu findByRestaurantName(String restaurantName);
 	Menu findByMenuName(String menuName);
 	
 	Menu register(Menu menu);

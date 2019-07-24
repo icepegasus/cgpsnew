@@ -17,6 +17,7 @@ public interface MenuRepository extends PagingAndSortingRepository<Menu, Long>,
 	
 	
 	Menu findByMenuName(@Param("menuName") String menuName);
+	Menu findByRestaurantName(@Param("restaurantName") String restaurantName);
 	List<Menu> findByRestaurantNameLike(@Param("restaurantName") String restaurantName);
 	List<Menu> findAll();
 		

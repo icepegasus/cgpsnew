@@ -28,6 +28,12 @@ public class MenuLogic implements MenuService {
 	public List<Menu> findByRestaurantNameLike(String restaurantName) {
 		return menuRepository.findByRestaurantNameLike(restaurantName);
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Menu findByRestaurantName(String restaurantName) {
+		return menuRepository.findByRestaurantName(restaurantName);
+	}
 
 	@Override
 	@Transactional(readOnly=true)

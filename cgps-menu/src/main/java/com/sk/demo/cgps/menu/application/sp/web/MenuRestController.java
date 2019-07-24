@@ -61,6 +61,12 @@ public class MenuRestController implements MenuService {
 	}
 	
 	@Override
+	@GetMapping("/search/restaurantnm")
+	public Menu findByRestaurantName(@RequestParam("restaurantName") String restaurantName) {
+		return menuService.findByRestaurantName(restaurantName);
+	}
+	
+	@Override
 	@GetMapping("/search/menu")
 	public Menu findByMenuName(@RequestParam("menuName") String menuName) {
 		return menuService.findByMenuName(menuName);
