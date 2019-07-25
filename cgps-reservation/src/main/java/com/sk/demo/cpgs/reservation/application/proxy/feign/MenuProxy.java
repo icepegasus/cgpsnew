@@ -2,7 +2,10 @@ package com.sk.demo.cpgs.reservation.application.proxy.feign;
 
 import java.util.Collection;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.cloud.netflix.feign.FeignClientProperties.FeignClientConfiguration;
 import org.springframework.hateoas.Resource;
@@ -16,6 +19,10 @@ import com.sk.demo.cpgs.reservation.application.proxy.feign.dto.menu.Menu;
 
 @Service
 public class MenuProxy {
+	
+//	@Value("http://${CGPS_MENU_SERVICE_HOST}:${CGPS_MENU_SERVICE_PORT}" )
+//	private String menuUrl;
+	
 	@Autowired
 	private MenuClient menuClient;
 	
@@ -34,7 +41,8 @@ public class MenuProxy {
 	public Menu findByMenuName(String restaurantName) {
 		return menuClient.findByMenuName(restaurantName);
 	}
-
+	
+	/**/
 	@FeignClient(name="menu", url="http://cgps-menu:8080", configuration=FeignClientConfiguration.class)
 	interface MenuClient {
 		@GetMapping("/v1/menu/{restaurantId}")
