@@ -1,5 +1,22 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ADD target/cgps-user-0.0.1-SNAPSHOT.jar app.jar
-ENV JAVA_OPTS=""
-ENTRYPOINT ["java","-D java.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+#FROM maven:3.5-jdk-8
+#ADD target/cgps-reservation-0.0.1-SNAPSHOT.jar cgps-reservation-0.0.1-SNAPSHOT.jar
+#ENTRYPOINT [""java"", ""-jar"", ""cgps-reservation-0.0.1-SNAPSHOT.jar""]
+
+# select image
+FROM maven:3.5-jdk-8
+
+# copy the project files
+COPY ./pom.xml ./pom.xml
+
+# build all dependencies for offline use
+RUN mvn dependency:go-offline -B
+
+# copy your other files
+COPY ./src ./src
+
+# build for release
+RUN mvn package
+
+# set the startup command to run your binary
+EXPOSE 8090
+CMD ["java", "-jar", "./target/cgps-user-0.0.1-SNAPSHOT.jar"]

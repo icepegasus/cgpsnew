@@ -19,8 +19,8 @@ public class MenuProxy {
 	@Autowired
 	private MenuClient menuClient;
 	
-	public Menu findById(Long getRestaurantId) {
-		return menuClient.findById(getRestaurantId).getContent();
+	public Menu findById(Long restaurantId) {
+		return menuClient.findById(restaurantId).getContent();
 	}
 
 	public Collection<Menu> findAll() {
@@ -35,18 +35,18 @@ public class MenuProxy {
 		return menuClient.findByMenuName(restaurantName);
 	}
 
-	@FeignClient(name="menu", url="http://localhost:11003", configuration=FeignClientConfiguration.class)
+	@FeignClient(name="menu", url="http://cgps-menu:8080", configuration=FeignClientConfiguration.class)
 	interface MenuClient {
-		@GetMapping("menu/{id}")
-		Resource<Menu> findById(@PathVariable("getRestaurantId") Long getRestaurantId);
+		@GetMapping("/v1/menu/{restaurantId}")
+		Resource<Menu> findById(@PathVariable("restaurantId") Long restaurantId);
 		
-		@GetMapping("menu")
+		@GetMapping("/v1/menu")
 		Resources<Menu> findAll();
 				
-		@GetMapping("menu/search/findByRestaurantName")
+		@GetMapping("/v1/menu/search/findByRestaurantName")
 		Menu findByRestaurantName(@RequestParam(value="restaurantName", required=true) String restaurantName);
 		
-		@GetMapping("menu/search/menu")
+		@GetMapping("/v1/menu/search/menu")
 		Menu findByMenuName(@RequestParam(value="menuName", required=true) String menuName);
 	}
 }

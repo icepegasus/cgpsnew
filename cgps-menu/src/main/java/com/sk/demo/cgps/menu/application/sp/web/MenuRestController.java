@@ -31,7 +31,7 @@ public class MenuRestController implements MenuService {
 	}
 	
 	@Override
-	@GetMapping("/{id}")
+	@GetMapping("/{restaurantId}")
 	public Menu findById(@PathVariable("restaurantId") Long restaurantId) {
 		return menuService.findById(restaurantId);
 	}

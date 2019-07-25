@@ -20,7 +20,7 @@ public class MenuLogic implements MenuService {
 	@Override
 	@Transactional(readOnly=true)
 	public Menu findById(Long restaurantId) {
-		return menuRepository.findOne(restaurantId);
+		return menuRepository.findByRestaurantId(restaurantId);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sk.demo.cpgs.reservation.domain.model.Reservation;
 import com.sk.demo.cpgs.reservation.domain.service.ReservationService;
 
 @RestController
@@ -15,9 +16,9 @@ public class ReservationRestController implements ReservationService {
 	private ReservationService reservationService;
 	
 	@Override
-	@PutMapping("/{id}/reservated")
-	public void reservate(@PathVariable("restaurantId") Long restaurantId) {
-		reservationService.reservate(restaurantId);
+	@PutMapping("/{restaurantId}/reservated")
+	public void reservate(@PathVariable("restaurantId") Long restaurantId, Reservation reservation) {
+		reservationService.reservate(restaurantId,reservation);
 	}
 
 }
