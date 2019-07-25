@@ -8,9 +8,9 @@ spring:
       path: /h2-console
 
   datasource:
-    url: jdbc:h2:mem:score
-    driverClassName: org.h2.Driver
-    username: sa
+    url: ${score.datasource.url}
+    driverClassName: ${score.datasource.driver}
+    username: ${score.datasource.username}
     password:
     
   jpa:
